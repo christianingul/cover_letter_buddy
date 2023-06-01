@@ -4,7 +4,7 @@ from langchain.utilities import SerpAPIWrapper
 class CustomSerpAPIWrapperJobSearch(SerpAPIWrapper):
     def __init__(self):
         serpapi_api_key = (
-            "68f8d6fcacfcf37681df5f592ea341866ea40dee6859c897042fcdf7c8ec90b0"
+            #
         )
         super(CustomSerpAPIWrapperJobSearch, self).__init__(
             serpapi_api_key=serpapi_api_key
@@ -59,7 +59,7 @@ def lookup(company: str, role: str) -> str:
     llm = ChatOpenAI(
         temperature=0,
         model_name="gpt-3.5-turbo",
-        openai_api_key="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",
+        openai_api_key=#,
     )
 
     template = """
