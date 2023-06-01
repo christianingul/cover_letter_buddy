@@ -18,7 +18,7 @@ def create_cover_letter(company: str, role: str, cover_letter: str):
     summary_prompt_template = PromptTemplate(
         input_variables=["job_information", "cover_letter", "name_of_company","role"], template=TASK_DESCRIPTION_TEMPLATE
     )
-    openai_api_key = "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"
+    openai_api_key = #
     llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo", openai_api_key=openai_api_key)
 
     chain = LLMChain(llm=llm, prompt=summary_prompt_template)
