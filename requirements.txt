@@ -1,0 +1,10 @@
+pandas
+numpy
+matplotlib
+streamlit
+langchain
+openai
+tabulate
+pinecone-client
+PyPDF2 
+tiktoken
