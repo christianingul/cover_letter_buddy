@@ -8,9 +8,12 @@ from PyPDF2 import PdfReader
 import streamlit as st
 from constants import TASK_DESCRIPTION_TEMPLATE
 
-def create_cover_letter(company: str, role: str, cover_letter: str):
-    print("Hello World")
 
+def create_cover_letter(company: str, role: str, cover_letter: str):
+    
+    openai_secret = st.secrets.get("openai")
+    openai_api_key = openai_secret.get("key")
+    
     company_url = company_lookup_agent(
         company=company, role=role)
 
@@ -18,7 +21,7 @@ def create_cover_letter(company: str, role: str, cover_letter: str):
     summary_prompt_template = PromptTemplate(
         input_variables=["job_information", "cover_letter", "name_of_company","role"], template=TASK_DESCRIPTION_TEMPLATE
     )
-    openai_api_key = #
+    
     llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo", openai_api_key=openai_api_key)
 
     chain = LLMChain(llm=llm, prompt=summary_prompt_template)
@@ -30,10 +33,23 @@ def create_cover_letter(company: str, role: str, cover_letter: str):
 
 
 # Streamlit UI starts here
+def main():
+    st.image("https://ai-cover.io/assets/images/AIwriting.png", width=300)
+    st.title('Cover Letter Buddy')
 
-st.image("https://ai-cover.io/assets/images/AIwriting.png", width=300)
+    password_secret = st.secrets.get("PASSWORD")
+    openai_secret = st.secrets.get("openai")
 
-st.title('Cover Letter Buddy')
+
+    if password_secret is None or openai_secret is None:
+        st.error("Required secrets are missing. Please check your secrets configuration.")
+        st.stop()
+
+    password = st.text_input("Enter password:", type="password")
+    if password != password_secret.get("password"):
+        st.error("Reach out to cingul@usc.edu for a password")
+        st.stop()
+
 
 company = st.text_input("Name of Company", placeholder="Enter your preferred company name here...")
 role = st.text_input("Role", placeholder="Enter your preferred company role here...")
@@ -65,3 +81,5 @@ if uploaded_file is not None:
     else:
         st.info("Please upload a PDF file.")
 
+if __name__ == '__main__':
+    main()
