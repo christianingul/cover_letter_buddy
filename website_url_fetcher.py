@@ -1,11 +1,11 @@
 from langchain.utilities import SerpAPIWrapper
-
+import streamlit as st
 
 class CustomSerpAPIWrapperJobSearch(SerpAPIWrapper):
+
     def __init__(self):
-        serpapi_api_key = (
-            #
-        )
+        serpapi_secret = st.secrets.get("serpapi")
+        serpapi_api_key = serpapi_secret.get("key")
         super(CustomSerpAPIWrapperJobSearch, self).__init__(
             serpapi_api_key=serpapi_api_key
         )
@@ -56,10 +56,13 @@ from langchain.agents import AgentType
 
 
 def lookup(company: str, role: str) -> str:
+    openai_secret = st.secrets.get("openai")
+    openai_api_key = openai_secret.get("key")
+
     llm = ChatOpenAI(
         temperature=0,
         model_name="gpt-3.5-turbo",
-        openai_api_key=#,
+        openai_api_key=openai_api_key,
     )
 
     template = """
