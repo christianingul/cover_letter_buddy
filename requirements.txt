@@ -9,3 +9,4 @@ serpy
 requests
 beautifulsoup4
 pandas
+google-search-results
