@@ -34,6 +34,7 @@ def create_cover_letter(company: str, role: str, cover_letter: str):
 
 # Streamlit UI starts here
 def main():
+    st.set_page_config(layout="wide")
     st.image("https://cdn.mos.cms.futurecdn.net/u5bN26Y7eYqrGYHDrBKqDk.jpg", width=300)
     st.title('Cover Letter Buddy')
 
